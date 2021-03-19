@@ -6,6 +6,7 @@ import BreakDuration from "./BreakDuration";
 import PlayStopButton from "./PlayStopButton";
 import TimeRemaining from "./TimeRemaining";
 import ProgressBar from "./ProgressBar";
+import newAudio from "../audio/rooster.mp3";
 
 function Pomodoro() {
   // Timer starts out paused
@@ -51,6 +52,8 @@ function Pomodoro() {
     });
 
     if(clockTimes[mode] === 0) {
+      console.log(clockTimes, "audio should play");
+      new Audio(newAudio).play(); 
       setClockTimes({
         ...clockTimes,
         focus: !clockTimes.focus,
