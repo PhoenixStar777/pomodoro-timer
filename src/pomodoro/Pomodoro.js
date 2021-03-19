@@ -33,29 +33,31 @@ function Pomodoro() {
   // when the session is active and the pause button is pressed, it displays the word "PAUSED"
 
   useInterval( // is called every second if isTimerRunning is truthy
-    () => {
+    
       // ToDo: Implement what should happen when the timer is running
-      async function handleSecondPassed() {
-        const mode = clockTimes.focus ? "focusRemaining" : "breakRemaining";
-  
-        await setClockTimes({
-          ...clockTimes,
-          [mode]: clockTimes[mode] - 1,
-        });
-
-        if(clockTimes[mode] === 0) {
-          setClockTimes({
-            ...clockTimes,
-            focus: !clockTimes.focus,
-            [mode]: clockTimes[clockTimes.focus ? "focusSetting" : "breakSetting"],
-          });
-        }
-      }
+       
       
-      handleSecondPassed();
-    },
+    handleSecondPassed,
     isTimerRunning ? 1000 : null
   );
+
+
+  function handleSecondPassed() {
+    const mode = clockTimes.focus ? "focusRemaining" : "breakRemaining";
+
+       setClockTimes({
+      ...clockTimes,
+      [mode]: clockTimes[mode] - 1,
+    });
+
+    if(clockTimes[mode] === 0) {
+      setClockTimes({
+        ...clockTimes,
+        focus: !clockTimes.focus,
+        [mode]: clockTimes[clockTimes.focus ? "focusSetting" : "breakSetting"],
+      });
+    }
+  }
 
   function playPause() {
     setIsTimerRunning((prevState) => !prevState);
